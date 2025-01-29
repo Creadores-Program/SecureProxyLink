@@ -1,4 +1,8 @@
 export default async function handler(req, res){
+  let targetUrl = process.env.URL;
+  if (!targetUrl) {
+    return res.status(500).json({ error: 'Target URL no configurado' });
+  }
   let options = {
     method: req.method,
     headers: req.headers
@@ -6,7 +10,7 @@ export default async function handler(req, res){
   if(req.headers["content-length"] && parseInt(req.headers["content-length"]) > 0){
     options.body = req.body;
   }
-  let responP = await fetch(process.env.URL, options);
+  let responP = await fetch(targetUrl, options);
   responP.headers.forEach(function(val, key){
     res.setHeader(key, val);
   });
