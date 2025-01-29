@@ -1,7 +1,7 @@
 export default async function handler(req, res){
   let targetUrl = process.env.URL;
   if (!targetUrl) {
-    return res.status(500).json({ error: 'Target URL no configurado' });
+    return res.status(500).json({ error: 'Target URL no config' });
   }
   let options = {
     method: req.method,
